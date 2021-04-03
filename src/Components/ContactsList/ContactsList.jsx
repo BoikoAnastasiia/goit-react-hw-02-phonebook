@@ -1,8 +1,8 @@
-const ContactsList = ({ contacts }) => {
+const ContactsList = ({ contacts }) => (
   <ul>
     {contacts.map(contact => (
       <li>{contact} </li>
     ))}
-  </ul>;
-};
+  </ul>
+);
 export default ContactsList;

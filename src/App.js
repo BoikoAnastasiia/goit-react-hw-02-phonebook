@@ -5,16 +5,18 @@ import ContactsList from './Components/ContactsList';
 
 class App extends Component {
   state = {
+    filter: '',
     contacts: [],
-    name: '',
   };
+
+  gatheredData = data => this.setState({ contacts: data });
 
   render() {
     console.log(this.state.contacts);
     return (
       <Container>
-        <PhoneBookForm />
-        {/* <ContactsList contacts={this.state.contacts} /> */}
+        <PhoneBookForm onSubmit={this.gatheredData} />
+        <ContactsList contacts={this.state.contacts} />
       </Container>
     );
   }

@@ -2,18 +2,26 @@ import { Component } from 'react';
 import styles from './PhoneBook.module.css';
 
 class PhoneBookForm extends Component {
+  state = {
+    contacts: [],
+    name: '',
+  };
+
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
-    this.props.onSubmit(this.state.name);
+    this.props.onSubmit(this.state.contacts);
+    this.addContact();
     this.reset();
   };
 
   handleChange = event => {
     const { name, value } = event.currentTarget;
-
     this.setState({ [name]: value });
-    this.setState({ contacts: [].push(name) });
+  };
+
+  addContact = () => {
+    const { contacts, name } = this.state;
+    contacts.push(name);
   };
 
   reset = () => {
@@ -21,9 +29,11 @@ class PhoneBookForm extends Component {
   };
   render() {
     return (
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label}> Name </label>
         <input
+          onChange={this.handleChange}
+          value={this.state.name}
           className={styles.input}
           type="text"
           name="name"
