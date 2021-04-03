@@ -10,10 +10,11 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.contacts);
     return (
       <Container>
         <PhoneBookForm />
-        <ContactsList contacts={this.state.contacts} />
+        {/* <ContactsList contacts={this.state.contacts} /> */}
       </Container>
     );
   }
