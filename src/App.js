@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from './Components/Container';
 import PhoneBookForm from './Components/PhoneBookForm';
 import ContactsList from './Components/ContactsList';
+import Search from './Components/Search';
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
 
@@ -39,17 +40,19 @@ class App extends Component {
     const normilizeFilter = filter.toLowerCase();
 
     return contacts.filter(({ name }) =>
-      name.text.toLowerCase().includes(normilizeFilter),
+      name.toLowerCase().includes(normilizeFilter),
     );
   };
 
   render() {
-    const { contacts } = this.state;
-    console.log('app contacts', this.state.contacts);
+    const { filter } = this.state;
+    const filteredNames = this.getFilteredNames();
+
     return (
       <Container>
         <PhoneBookForm onSubmit={this.addContact} onAdd={this.addContact} />
-        <ContactsList contacts={contacts} onDelete={this.deleteContact} />
+        <Search value={filter} onChange={this.changeFilter} />
+        <ContactsList contacts={filteredNames} onDelete={this.deleteContact} />
       </Container>
     );
   }

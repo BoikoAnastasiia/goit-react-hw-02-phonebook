@@ -5,7 +5,7 @@ const ContactsList = ({ contacts, onDelete }) => (
     {contacts.map(({ id, name, number }) => (
       <li key={id} className={styles.list}>
         <div className={styles.buttonContainer}>
-          <button className={styles.delete} onClick={() => onDelete}>
+          <button className={styles.delete} onClick={id => onDelete(id)}>
             -
           </button>
         </div>
@@ -19,4 +19,15 @@ const ContactsList = ({ contacts, onDelete }) => (
 );
 export default ContactsList;
 
-// const contacts = [{ id: 'ssss', name: 'ddddddd', number: '66666666' }];
+// const g = [
+//   { id: 'ssss', name: 'ddddddd', number: '66666666' },
+//   { id: 'ffffff', name: 'ttttttttt', number: '66666666' },
+//   { id: 'ssss', name: 'gggggggg', number: '66666666' },
+// ];
+
+// const filter = 'dd';
+// const normilizeFilter = filter.toLowerCase();
+
+// console.log(
+//   g.filter(({ name }) => name.toLowerCase().includes(normilizeFilter)),
+// );
