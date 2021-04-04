@@ -11,22 +11,15 @@ class App extends Component {
     contacts: [],
   };
 
-  // gatheredData = data => {
-  //   const nameNumber = data;
-  //   // nameNumber.id = uuidv4();
-
-  //   return nameNumber;
-  // };
-
   gatheredData = data => {
     const newData = data;
     return newData;
   };
 
-  addContact = () => {
-    const newContact = this.gatheredData();
-    console.log('newontact ', newContact);
-    this.setState(prevState => ({
+  addContact = data => {
+    const newContact = data;
+    newContact.id = uuidv4();
+    return this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
     }));
   };
@@ -55,7 +48,7 @@ class App extends Component {
     console.log('app contacts', this.state.contacts);
     return (
       <Container>
-        <PhoneBookForm onSubmit={this.gatheredData} onAdd={this.addContact} />
+        <PhoneBookForm onSubmit={this.addContact} onAdd={this.addContact} />
         <ContactsList contacts={contacts} onDelete={this.deleteContact} />
       </Container>
     );

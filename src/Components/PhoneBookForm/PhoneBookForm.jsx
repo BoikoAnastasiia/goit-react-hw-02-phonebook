@@ -9,7 +9,7 @@ class PhoneBookForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(...this.state);
+    this.props.onSubmit(this.state);
     this.reset();
   };
 
@@ -47,11 +47,7 @@ class PhoneBookForm extends Component {
           title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
           required
         />
-        <button
-          type="submit"
-          onSubmit={this.props.onAdd}
-          className={styles.button}
-        >
+        <button type="submit" className={styles.button}>
           Add
         </button>
       </form>
