@@ -18,16 +18,3 @@ const ContactsList = ({ contacts, onDelete }) => (
   </ul>
 );
 export default ContactsList;
-
-// const g = [
-//   { id: 'ssss', name: 'ddddddd', number: '66666666' },
-//   { id: 'ffffff', name: 'ttttttttt', number: '66666666' },
-//   { id: 'ssss', name: 'gggggggg', number: '66666666' },
-// ];
-
-// const filter = 'dd';
-// const normilizeFilter = filter.toLowerCase();
-
-// console.log(
-//   g.filter(({ name }) => name.toLowerCase().includes(normilizeFilter)),
-// );

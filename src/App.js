@@ -9,7 +9,12 @@ uuidv4();
 class App extends Component {
   state = {
     filter: '',
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
   };
 
   gatheredData = data => {
@@ -19,6 +24,10 @@ class App extends Component {
 
   addContact = data => {
     const newContact = data;
+
+    if (this.state.contacts.filter(name => name.name === data.name))
+      return alert('this contact is already in your contacts');
+
     newContact.id = uuidv4();
     return this.setState(prevState => ({
       contacts: [newContact, ...prevState.contacts],
@@ -50,7 +59,11 @@ class App extends Component {
 
     return (
       <Container>
-        <PhoneBookForm onSubmit={this.addContact} onAdd={this.addContact} />
+        <PhoneBookForm
+          onSubmit={this.addContact}
+          onAdd={this.addContact}
+          onDouble={this.denyDouble}
+        />
         <Search value={filter} onChange={this.changeFilter} />
         <ContactsList contacts={filteredNames} onDelete={this.deleteContact} />
       </Container>
