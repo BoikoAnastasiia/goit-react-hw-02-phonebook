@@ -1,23 +1,42 @@
 import { Component } from 'react';
 import styles from './PhoneBook.module.css';
+import { v4 as uuidv4 } from 'uuid';
+uuidv4();
 
 class PhoneBookForm extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(...this.state.contacts);
     this.addContact();
+    this.props.onSubmit(...this.state.contacts);
     this.reset();
   };
 
-  reset = () => {
-    this.setState({ name: '' });
+  addContact = () => {
+    const contact = {
+      id: uuidv4(),
+      name: this.state.name,
+      number: this.state.number,
+    };
+    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
+
+  handleChange = event => {
+    const { name, value } = event.currentTarget;
+    this.setState({ [name]: value });
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
+  };
+
   render() {
+    console.log(this.state.contacts);
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label}> Name </label>
@@ -35,9 +54,10 @@ class PhoneBookForm extends Component {
 
         <input
           type="tel"
+          onChange={this.handleChange}
           className={styles.input}
           name="number"
-          pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
+          // pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
           title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
           required
         />
