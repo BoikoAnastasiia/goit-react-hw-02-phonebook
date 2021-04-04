@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Container from './Components/Container';
 import PhoneBookForm from './Components/PhoneBookForm';
 import ContactsList from './Components/ContactsList';
+import { v4 as uuidv4 } from 'uuid';
+uuidv4();
 
 class App extends Component {
   state = {
@@ -9,7 +11,25 @@ class App extends Component {
     contacts: [],
   };
 
-  gatheredData = data => this.setState({ contacts: data });
+  // gatheredData = data => {
+  //   const nameNumber = data;
+  //   // nameNumber.id = uuidv4();
+
+  //   return nameNumber;
+  // };
+
+  gatheredData = data => {
+    const newData = data;
+    return newData;
+  };
+
+  addContact = () => {
+    const newContact = this.gatheredData();
+    console.log('newontact ', newContact);
+    this.setState(prevState => ({
+      contacts: [newContact, ...prevState.contacts],
+    }));
+  };
 
   deleteContact = nameId => {
     this.setState(prevState => ({
@@ -32,10 +52,10 @@ class App extends Component {
 
   render() {
     const { contacts } = this.state;
-    console.log('app  contacts', this.state.contacts);
+    console.log('app contacts', this.state.contacts);
     return (
       <Container>
-        <PhoneBookForm onSubmit={this.gatheredData} />
+        <PhoneBookForm onSubmit={this.gatheredData} onAdd={this.addContact} />
         <ContactsList contacts={contacts} onDelete={this.deleteContact} />
       </Container>
     );

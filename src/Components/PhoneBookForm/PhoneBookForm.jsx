@@ -1,28 +1,16 @@
 import { Component } from 'react';
 import styles from './PhoneBook.module.css';
-import { v4 as uuidv4 } from 'uuid';
-uuidv4();
 
 class PhoneBookForm extends Component {
   state = {
-    contacts: [],
     name: '',
     number: '',
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.contacts);
+    this.props.onSubmit(...this.state);
     this.reset();
-  };
-
-  addContact = (name, number) => {
-    const contact = {
-      id: uuidv4(),
-      name,
-      number,
-    };
-    this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
 
   handleChange = event => {
@@ -35,7 +23,6 @@ class PhoneBookForm extends Component {
   };
 
   render() {
-    console.log('form contacts', this.state.contacts);
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label}> Name </label>
@@ -62,7 +49,7 @@ class PhoneBookForm extends Component {
         />
         <button
           type="submit"
-          onSubmit={this.addContact}
+          onSubmit={this.props.onAdd}
           className={styles.button}
         >
           Add
