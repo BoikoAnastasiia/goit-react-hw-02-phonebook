@@ -21,24 +21,22 @@ class App extends Component {
     this.setState({ filter: event.currentTarget.value });
   };
 
-  getFilteredTodos = () => {
+  getFilteredNames = () => {
     const { filter, contacts } = this.state;
     const normilizeFilter = filter.toLowerCase();
 
-    return contacts.filter(todo =>
-      todo.text.toLowerCase().includes(normilizeFilter),
+    return contacts.filter(({ name }) =>
+      name.text.toLowerCase().includes(normilizeFilter),
     );
   };
 
   render() {
     const { contacts } = this.state;
+    console.log('app  contacts', this.state.contacts);
     return (
       <Container>
-        <PhoneBookForm
-          onSubmit={this.gatheredData}
-          onDelete={this.deleteContact}
-        />
-        <ContactsList contacts={contacts} />
+        <PhoneBookForm onSubmit={this.gatheredData} />
+        <ContactsList contacts={contacts} onDelete={this.deleteContact} />
       </Container>
     );
   }

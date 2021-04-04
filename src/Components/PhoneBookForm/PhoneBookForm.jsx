@@ -12,16 +12,15 @@ class PhoneBookForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.addContact();
-    this.props.onSubmit(...this.state.contacts);
+    this.props.onSubmit(this.state.contacts);
     this.reset();
   };
 
-  addContact = () => {
+  addContact = (name, number) => {
     const contact = {
       id: uuidv4(),
-      name: this.state.name,
-      number: this.state.number,
+      name,
+      number,
     };
     this.setState(({ contacts }) => ({ contacts: [contact, ...contacts] }));
   };
@@ -36,7 +35,7 @@ class PhoneBookForm extends Component {
   };
 
   render() {
-    console.log(this.state.contacts);
+    console.log('form contacts', this.state.contacts);
     return (
       <form className={styles.form} onSubmit={this.handleSubmit}>
         <label className={styles.label}> Name </label>
@@ -61,7 +60,11 @@ class PhoneBookForm extends Component {
           title="Номер телефона должен состоять из 11-12 цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
           required
         />
-        <button onSubmit={this.handleSubmit} className={styles.button}>
+        <button
+          type="submit"
+          onSubmit={this.addContact}
+          className={styles.button}
+        >
           Add
         </button>
       </form>
