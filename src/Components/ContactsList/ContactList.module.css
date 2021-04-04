@@ -1,0 +1,9 @@
+.list {
+  padding: 8px;
+  border-bottom: solid 1px;
+  text-transform: capitalize;
+}
+
+.container {
+  margin-top: 20px;
+}

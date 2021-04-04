@@ -9,19 +9,14 @@ class PhoneBookForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.onSubmit(this.state.contacts);
+    this.props.onSubmit(...this.state.contacts);
     this.addContact();
     this.reset();
   };
 
   handleChange = event => {
-    const { name, value } = event.currentTarget;
-    this.setState({ [name]: value });
-  };
-
-  addContact = () => {
-    const { contacts, name } = this.state;
-    contacts.push(name);
+    const { name, contacts } = event.currentTarget;
+    this.setState({ [contacts]: [{ name, id: uuidv4() }] });
   };
 
   reset = () => {

@@ -1,7 +1,11 @@
+import styles from './ContactList.module.css';
+
 const ContactsList = ({ contacts }) => (
-  <ul>
-    {contacts.map(contact => (
-      <li>{contact} </li>
+  <ul className={styles.container}>
+    {contacts.map(({ name, id }) => (
+      <li key={id} className={styles.list}>
+        {name}
+      </li>
     ))}
   </ul>
 );
