@@ -26,7 +26,7 @@ class App extends Component {
     const newContact = data;
 
     if (this.state.contacts.filter(name => name.name === data.name))
-      return alert('this contact is already in your contacts');
+      return alert(`${newContact.name} is already in your contacts`);
 
     newContact.id = uuidv4();
     return this.setState(prevState => ({
